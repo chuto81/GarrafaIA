@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 Hola Equipo GarrafaIA
 Max y Chuto
-=======
-HOla equipo
->>>>>>> d5c9bea7a20228c28f66f5809f8a16248de0bc30
