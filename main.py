@@ -25,11 +25,28 @@ def run():
     #Datos de entrada para el modelo
     gp = final.groupby(['Cliente']).agg({'nr':'mean', 'disc':'mean'})
 
-    i = -1
+    #<<------------------------------Modelo------------------------------------>>')
+
+    # x = disc - nr - fecha_mes
+    x = final.iloc[:, 8:11].values
+
+    # y = Volumen
+    y = final.iloc[:, -9].values
+
+    # reshape para 2D, no para 3D en adelante
+    y = y.reshape(-1, 1)
+    #x = x.reshape(-1, 1)
+
+    X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.00001, random_state = 0)
+
+    reg = LinearRegression()
+    reg.fit(X_train, Y_train)
+
+    k = -1
 
     for gp['Cliente'] in gp.index:
 
-        i += 1
+        k += 1
 
         #Valores Unicos
         unicosC = {}
@@ -50,30 +67,10 @@ def run():
 
         #Inputs de Clientes:
         mes_user = float(18)
-        revenue_user = gp.iloc[i,0]
-        descuento_user = gp.iloc[i,1]
+        revenue_user = gp.iloc[k,0]
+        descuento_user = gp.iloc[k,1]
 
-        #<<------------------------------Modelo------------------------------------>>')
-
-    # x = disc - nr - fecha_mes
-        x = final.iloc[:, 8:11].values
-
-        # y = Volumen
-        y = final.iloc[:, -9].values
-
-        # reshape para 2D, no para 3D en adelante
-        y = y.reshape(-1, 1)
-        #x = x.reshape(-1, 1)
-        x
-
-        X_train, X_test, Y_train, Y_test = train_test_split(x, y, test_size = 0.00001, random_state = 0)
-
-        X_train[:,1]
-
-        reg = LinearRegression()
-        reg.fit(X_train, Y_train)
-
-        #'<<------------------------------Predicción------------------------------------>>')
+        #'<<------------------------------Predicción del Modelo------------------------------------>>')
 
         X_objetivo = np.array([[descuento_user,  revenue_user, mes_user]])
         Y_pred = reg.predict(X_objetivo)
@@ -163,7 +160,7 @@ def run():
         # Probabilidad de que sea una marca segun el volumen * Probabilidad segun el recuento
         res_list = [] 
         for i in range(len(psdif)): 
-            res_list.append(psdif[i] * pmr[i] ) 
+            res_list.append(psdif[i] * pmr[i] )
 
         s_res_list = sum(res_list)
 
@@ -182,19 +179,36 @@ def run():
         # print('\n')
         # print('\n')
 
-        print('P_marca_1:', res_list[0])
-        print('P_marca_2:', res_list[1])
-        print('P_marca_3:', res_list[2])
-        print('P_marca_4:', otras_marcas_p)
-        print('P_marca_5:', otras_marcas_p)
+        # print('P_marca_1:', res_list[0])
+        # print('P_marca_2:', res_list[1])
+        # print('P_marca_3:', res_list[2])
+        # print('P_marca_4:', otras_marcas_p)
+        # print('P_marca_5:', otras_marcas_p)
+
+        #resultado = pd.DataFrame(({'Marca_1': , 'Marca_2': , 'Marca_3': , 'Marca_Inno1': , 'Marca_Inno2': }))
+
+        print(k)
+        print(res_list[0].values[0])
+
+        res1 = float(res_list[0].values[0])
+        # res2 = res_list[1].values[0]
+        # res3 = res_list[2].values[0]
+        # res4 = otras_marcas_p.values[0]
+        # res5 = otras_marcas_p.values[0]
+
+        print(res1)
+        print(type(res1))
+
 
         resultado = pd.DataFrame()
 
-        resultado.iloc[i,0] = res_list[i,0]
-        resultado.iloc[i,1] = res_list[i,1]
-        resultado.iloc[i,2] = res_list[i,2]
-        resultado.iloc[i,3] = otras_marcas_p
-        resultado.iloc[i,4] = otras_marcas_p
+        resultado.iloc[k, 0] = 0.1
+        # resultado.iloc[k, 1] = res_list[1].values[0]
+        # resultado.iloc[k, 2] = res_list[2].values[0]
+        # resultado.iloc[k, 3] = otras_marcas_p.values[0]
+        # resultado.iloc[k, 4] = otras_marcas_p.values[0]
+
+        #print(resultado)
 
     resultado.to_csv(r'C:\Users\chuto\Dropbox\DESARROLLADOR\014_Hackaton Brewing 2020\Code\Input3_clientes_testPRUEBA.csv')
 
