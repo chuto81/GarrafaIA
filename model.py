@@ -62,10 +62,10 @@ def run():
     print('\n')
     print('¿En que mes se realiza la transacción?, Enero es 1 y Diciembre es 12')
     print('Ingresa el valor de ingreso esperado en este negocio unidad = moneda millones|ejemplo=8.4')
-    print('¿Le vas a dar descuento?unidad = moneda millones, ejemplo 1.2')
+    print('¿Le vas a dar descuento? unidad = moneda millones, ejemplo 1.2')
     mes_user = int(input("Mes:"))+4
-    revenue_user = int(input("Ingreso esperado"))
-    descuento_user = int(input("Descuento"))
+    revenue_user = float(input("Ingreso esperado"))
+    descuento_user = float(input("Descuento"))
     
     
     
@@ -110,12 +110,13 @@ def run():
     recmean_3 = 2353
 
 #--------------------------
+#suma
     rn_m1 = 59341177.3
     rn_m2 = 683983.3 
     rn_m3 = 1064539.8
 
 #---------------------------  
-
+#suma
     v_m1 = 8456.4
     v_m2 = 88.5
     v_m3 = 1.5
@@ -215,7 +216,7 @@ def run():
     print('P_marca_2:', res_list[1])
     print('P_marca_3:', res_list[2])
     print('P_marca_4:', otras_marcas_p)
-    print('P_marca_4:', otras_marcas_p)
+    print('P_marca_5:', otras_marcas_p)
 
     print('\n')
     print('\n')
@@ -229,8 +230,10 @@ def run():
     v5 = int(input('Categoria'))
     v6 = int(input('Nevera'))
 
-    #variables_a_considerar = [v1,v2,v3,v4,v5,v6]
+    variables_a_considerar = [v1,v2,v3,v4,v5,v6]
     
+    print(proba[1])
+
     #for v in variables_a_considerar:
     #    variables_a_considerar
     #print('\n')
