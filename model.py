@@ -60,10 +60,10 @@ def run():
 
     #Inputs del usuario:
     print('\n')
-    print('¿En que mes se realiza la transacción?, Enero es 1 y Diciembre es 12')
+    print('¿En que mes se realiza la transacción?, Mayo es 5 y Diciembre es 12')
     print('Ingresa el valor de ingreso esperado en este negocio unidad = moneda millones|ejemplo=8.4')
     print('¿Le vas a dar descuento? unidad = moneda millones, ejemplo 1.2')
-    mes_user = int(input("Mes:"))+4
+    mes_user = float(input("Mes:"))
     revenue_user = float(input("Ingreso esperado"))
     descuento_user = float(input("Descuento"))
     
@@ -226,13 +226,30 @@ def run():
     v1 = int(input('SegmentoPrecio'))
     v2 = int(input('Cupo'))
     v3 = int(input('CapacidadEnvase'))
-    v4 = int(input('CapacidadEnvase'))
+    v4 = int(input('Subcanal'))
     v5 = int(input('Categoria'))
     v6 = int(input('Nevera'))
 
-    variables_a_considerar = [v1,v2,v3,v4,v5,v6]
+    variables_a_considerar = pd.DataFrame([v1,v2,v3,v4,v5,v6])
     
-    print(proba[1])
+    probav = pd.DataFrame.from_dict([proba])
+    
+    probavfin = pd.DataFrame()
+
+    print(variables_a_considerar.shape)
+    print(probav)
+
+    finalv2 = probav.drop(['Año','Mes','Cliente','Marca2','Volumen','disc','nr','fecha_mes','Regional2'], axis=0)
+    print(probav)
+    #x = 1
+    #for v in range(5):
+        #probavfin[v] = variables_a_considerar[v] * probav[v]
+
+
+    
+
+    
+    
 
     #for v in variables_a_considerar:
     #    variables_a_considerar
